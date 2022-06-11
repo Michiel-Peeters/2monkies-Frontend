@@ -1,6 +1,6 @@
 import React from "react";
 
-const TipForm = () => {
+const TipForm = ({ tip, setTip }) => {
   return (
     <form
       action=""
@@ -15,9 +15,15 @@ const TipForm = () => {
         cols="30"
         rows="7"
         placeholder="Fill in a Tip"
+        value={tip}
+        onChange={(e) => {
+          setTip(e.target.value);
+        }}
       ></textarea>
       <div className="form__buttons">
-        <button className="button button__clear">Clear</button>
+        <button className="button button__clear" onClick={() => setTip("")}>
+          Clear
+        </button>
         <button type="submit" className="button button__submit">
           verzend
         </button>

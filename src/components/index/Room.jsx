@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Timer from "./Timer";
 import TipForm from "./TipForm";
@@ -11,6 +11,7 @@ const Room = ({
     difficulty: { maxTime },
   },
 }) => {
+  const [tip, setTip] = useState("");
   return (
     <div className="escape__rooms__room">
       <details>
@@ -27,8 +28,8 @@ const Room = ({
         <div className="content">
           <Timer maxTime={maxTime} />
           <div className="content__tips">
-            <TipForm />
-            <DefaultTips />
+            <TipForm tip={tip} setTip={setTip} />
+            <DefaultTips setTip={setTip} />
           </div>
         </div>
       </details>

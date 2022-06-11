@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
 
 const Timer = ({ maxTime }) => {
-  console.log(maxTime);
   let [seconds, setSeconds] = useState(maxTime * 60);
   const [playTime, setPlayTime] = useState(
     new Date(seconds * 1000).toISOString().substr(11, 8)
