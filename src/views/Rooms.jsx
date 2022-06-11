@@ -11,8 +11,6 @@ const Rooms = () => {
     <>
       <div className="container__medium">
         <section className="escape">
-          {isError && <p>Error...</p>}
-          {isLoading && <p>Loading...</p>}
           <Welcome />
           <Info />
           <div className="escape__rooms">

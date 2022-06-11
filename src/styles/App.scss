@@ -56,16 +56,13 @@ section{
   color: $white;
   font-weight: bold;
   cursor: pointer;
-  &__submit{
-    background-color: $darkyellow;
-  }
   &__admin, &__play {
     background-color: $mediumlightblue;
     &:hover {
       background-color: $lightblue;
     }
   }
-  &__logout, &__pause, &__preview{
+  &__logout, &__pause, &__preview,&__submit{
     background-color: $darkyellow;
     &:hover{
       background-color: $mediumyellow;
