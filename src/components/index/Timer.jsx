@@ -4,7 +4,7 @@ import { useTimer } from "react-timer-hook";
 
 const Timer = ({ maxTime }) => {
   const time = maxTime;
-  let [seconds, setSeconds] = useState(time * 60);
+  const [seconds, setSeconds] = useState(time * 60);
   const [playTime, setPlayTime] = useState(
     new Date(seconds * 1000).toISOString().substr(11, 8)
   );
@@ -22,6 +22,10 @@ const Timer = ({ maxTime }) => {
         clearTimeout(timer);
       };
     }
+    if (stop) {
+      setSeconds(time * 60);
+      setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
+    }
   });
 
   const playHandler = () => {
@@ -38,22 +42,20 @@ const Timer = ({ maxTime }) => {
     setPlay(false);
     setPause(false);
     setStop(true);
-    setSeconds(time * 60);
   };
 
   return (
     <div className="content__timer">
       <p className="content__timer__time">{playTime}</p>
       <div className="content__timer__buttons">
-        {!play && (
-          <button
-            className="button button__play"
-            disabled={play}
-            onClick={playHandler}
-          >
-            play
-          </button>
-        )}
+        <button
+          className="button button__play"
+          disabled={play}
+          onClick={playHandler}
+        >
+          play
+        </button>
+
         <button className="button button__pause" onClick={pauseHandler}>
           pauze
         </button>
