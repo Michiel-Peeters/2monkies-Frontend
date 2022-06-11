@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
 
 const Timer = ({ maxTime }) => {
-  let [seconds, setSeconds] = useState(maxTime * 60);
+  const time = maxTime;
+  let [seconds, setSeconds] = useState(time * 60);
   const [playTime, setPlayTime] = useState(
     new Date(seconds * 1000).toISOString().substr(11, 8)
   );
@@ -11,46 +12,48 @@ const Timer = ({ maxTime }) => {
   const [pause, setPause] = useState(false);
   const [stop, setStop] = useState(false);
 
-  let timerInterval = null;
-
   useEffect(() => {
     if (play) {
-      setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
+      const timer = setTimeout(() => {
+        setSeconds((prev) => prev - 1);
+        setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+      };
     }
-  }, [seconds, play, pause, stop]);
+  });
 
   const playHandler = () => {
     setPlay(true);
     setPause(false);
     setStop(false);
-    timerInterval = setInterval(() => {
-      setSeconds((prev) => prev - 1);
-    }, 1000);
   };
   const pauseHandler = () => {
     setPlay(false);
     setPause(true);
     setStop(false);
-    clearInterval(timerInterval);
   };
   const stopHandler = () => {
     setPlay(false);
     setPause(false);
     setStop(true);
-    clearInterval(timerInterval);
+    setSeconds(time * 60);
   };
 
   return (
     <div className="content__timer">
       <p className="content__timer__time">{playTime}</p>
       <div className="content__timer__buttons">
-        <button
-          className="button button__play"
-          disabled={play}
-          onClick={playHandler}
-        >
-          play
-        </button>
+        {!play && (
+          <button
+            className="button button__play"
+            disabled={play}
+            onClick={playHandler}
+          >
+            play
+          </button>
+        )}
         <button className="button button__pause" onClick={pauseHandler}>
           pauze
         </button>
