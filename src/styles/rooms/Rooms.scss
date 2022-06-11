@@ -1,0 +1,143 @@
+.escape{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+    &__rooms{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        padding: 0 20px;
+        &__room{
+            border-bottom: 2px solid $mediumblue;
+            // border-radius: 10px;
+        }
+    }
+}
+
+.info{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    &__button{
+        color: rgb(38, 38, 38);
+        font-weight: bold;
+        border: 2px solid rgb(38, 38, 38);
+        border-radius: 50%;
+        font-size: 20px;
+        width: 25px;
+        height:25px;
+        text-decoration: none;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        transition: all 300ms;
+        &:hover{
+            border-color: $mediumlightblue;
+            color: $mediumlightblue;
+        }
+    }
+}
+
+details{
+    padding: 10px;
+}
+
+details summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    color: $white;
+    background-color: $mediumblue;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    min-height: 200px;
+    gap: 30px;
+    &__timer{
+        width: calc(100% - 50%);
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        &__time{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        &__buttons{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    }
+    &__tips{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        width: calc(100% - 50%);
+        &__form{
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            & textarea{
+                resize:none;
+                border: none;
+                border: 1px solid $mediumblue;
+                outline: none;
+                font-size: 20px;
+                background-color: transparent;
+            }
+        }
+        &__list{
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 250px;
+            overflow: hidden;
+            overflow-y: scroll;
+            
+        }
+        &__button{
+            border:none;
+            outline: none;
+            font-size: 15px;
+            font-weight: bold;
+            width: 300px;
+            height: auto;
+            min-height: 50px;
+            text-align:start;
+            background-color: transparent;
+            border: 1px solid $mediumblue;
+            color: $darkblue;
+            border-radius: 10px;
+            
+            cursor: pointer;
+            &:hover{
+                background-color: $lightblue;
+            }
+        }
+    }
+}
+
+.form{
+    &__buttons{
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px
+    }
+}

@@ -1,0 +1,26 @@
+.heading {
+  background-color: $mediumblue;
+  height: 70px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__img {
+    width: 60px;
+    height: auto;
+  }
+  &__items {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    &__user {
+        color: $white;
+        & span{
+            color: $darkyellow;
+            font-weight: bold;
+        }
+    }
+  }
+}
