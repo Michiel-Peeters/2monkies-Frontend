@@ -2,10 +2,10 @@ import React from "react";
 import Welcome from "../components/Welcome";
 import Info from "../components/index/Info";
 import Room from "../components/index/Room";
-import { useGetDifficultiesQuery } from "../redux/api/difficultyAPI";
+import { useGetRoomsQuery } from "../redux/api/roomAPI";
 
 const Rooms = () => {
-  const { data, isError, isLoading } = useGetDifficultiesQuery(undefined);
+  const { data, isError, isLoading } = useGetRoomsQuery(undefined);
 
   return (
     <>
@@ -13,20 +13,13 @@ const Rooms = () => {
         <section className="escape">
           {isError && <p>Error...</p>}
           {isLoading && <p>Loading...</p>}
-          {data &&
-            data["hydra:member"].map(({ id, name }) => {
-              return (
-                <h1>
-                  {id} {name}
-                </h1>
-              );
-            })}
           <Welcome />
           <Info />
           <div className="escape__rooms">
-            <Room />
-            <Room />
-            <Room />
+            {data &&
+              data["hydra:member"].map((room) => {
+                return <Room room={room} />;
+              })}
           </div>
         </section>
       </div>

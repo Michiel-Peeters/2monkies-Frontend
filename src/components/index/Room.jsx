@@ -4,14 +4,20 @@ import Timer from "./Timer";
 import TipForm from "./TipForm";
 import DefaultTips from "./DefaultTips";
 
-const Room = () => {
+const Room = ({
+  room: {
+    id,
+    name,
+    difficulty: { maxTime },
+  },
+}) => {
   return (
     <div className="escape__rooms__room">
       <details>
         <summary>
-          Room 2
+          {name}
           <Link
-            to={"/room1"}
+            to={`/${name}`}
             target={"_blank"}
             className="button button__preview"
           >
@@ -19,7 +25,7 @@ const Room = () => {
           </Link>
         </summary>
         <div className="content">
-          <Timer />
+          <Timer maxTime={maxTime} />
           <div className="content__tips">
             <TipForm />
             <DefaultTips />
