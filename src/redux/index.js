@@ -5,6 +5,7 @@ import gameAPI from "./api/gameAPI";
 import roomAPI from "./api/roomAPI";
 import tipAPI from "./api/tipAPI";
 import tipGivenAPI from "./api/tipGivenAPI";
+import userAPI from "./api/userAPI";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -13,6 +14,7 @@ const store = configureStore({
     [gameAPI.reducerPath]: gameAPI.reducer,
     [tipGivenAPI.reducerPath]: tipGivenAPI.reducer,
     [tipAPI.reducerPath]: tipAPI.reducer,
+    [userAPI.reducerPath]: userAPI.reducer,
   }),
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),
@@ -21,6 +23,7 @@ const store = configureStore({
     gameAPI.middleware,
     tipGivenAPI.middleware,
     tipAPI.middleware,
+    userAPI.middleware,
   ],
 });
 
