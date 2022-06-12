@@ -10,7 +10,7 @@ const roomAPI = createApi({
       query: () => `/`,
       providesTags: ["AllRooms"],
     }),
-    getRoomyById: builder.query({
+    getRoomById: builder.query({
       query: (id) => `/${id}`,
     }),
     postRoom: builder.query({
@@ -59,7 +59,7 @@ const roomAPI = createApi({
 export default roomAPI;
 export const {
   useGetRoomsQuery,
-  useGetRoomyByIdQuery,
+  useGetRoomByIdQuery,
   usePostRoomMutation,
   usePutRoomMutation,
   usePatchRoomMutation,
