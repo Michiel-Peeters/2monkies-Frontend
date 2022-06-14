@@ -1,49 +1,21 @@
 import React from "react";
 
-const DefaultTips = ({ setTip }) => {
+const DefaultTips = ({ setTip, defaultTips }) => {
+  console.log(defaultTips);
   return (
     <ul className="content__tips__list">
-      <li>
-        <button
-          className="content__tips__button"
-          onClick={(e) => setTip(e.target.innerText)}
-        >
-          default tip 1
-        </button>
-      </li>
-      <li>
-        <button
-          className="content__tips__button"
-          onClick={(e) => setTip(e.target.innerText)}
-        >
-          default tip 2
-        </button>
-      </li>
-      <li>
-        <button
-          className="content__tips__button"
-          onClick={(e) => setTip(e.target.innerText)}
-        >
-          default tip 3
-        </button>
-      </li>
-      <li>
-        <button
-          className="content__tips__button"
-          onClick={(e) => setTip(e.target.innerText)}
-        >
-          default tip 4
-        </button>
-      </li>
-      <li>
-        <button
-          className="content__tips__button"
-          onClick={(e) => setTip(e.target.innerText)}
-        >
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis,
-          id?
-        </button>
-      </li>
+      {defaultTips.map(({ id, description }) => {
+        return (
+          <li key={id}>
+            <button
+              className="content__tips__button"
+              onClick={(e) => setTip(e.target.innerText)}
+            >
+              {description}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 };

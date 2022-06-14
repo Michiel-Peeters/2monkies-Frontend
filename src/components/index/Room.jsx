@@ -9,6 +9,7 @@ const Room = ({
     id,
     name,
     difficulty: { maxTime },
+    tips,
   },
 }) => {
   const [tip, setTip] = useState("");
@@ -29,7 +30,7 @@ const Room = ({
           <Timer maxTime={maxTime} />
           <div className="content__tips">
             <TipForm tip={tip} setTip={setTip} />
-            <DefaultTips setTip={setTip} />
+            <DefaultTips defaultTips={tips} setTip={setTip} />
           </div>
         </div>
       </details>

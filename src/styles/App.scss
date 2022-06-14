@@ -9,6 +9,9 @@
 @import "Welcome.scss";
 @import "./rooms/Rooms.scss";
 
+// modals css
+@import "./modals/infoModal.scss";
+
 
 *{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -62,7 +65,7 @@ section{
       background-color: $lightblue;
     }
   }
-  &__logout, &__pause, &__preview,&__submit{
+  &__logout, &__pause, &__preview,&__submit, &__close{
     background-color: $darkyellow;
     &:hover{
       background-color: $mediumyellow;
@@ -75,4 +78,7 @@ section{
     }
   }
 }
+
+
+
 
