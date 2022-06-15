@@ -1,7 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addGame } from "../../redux/slices/playing.js";
+import {
+  addGame,
+  stopGame,
+  updateSeconds,
+} from "../../redux/slices/playing.js";
 
 const Timer = ({ maxTime, roomId, roomName }) => {
   const time = maxTime;
@@ -18,6 +22,12 @@ const Timer = ({ maxTime, roomId, roomName }) => {
       const timer = setTimeout(() => {
         setSeconds((prev) => prev - 1);
         setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
+        dispatch(
+          updateSeconds({
+            roomId,
+            seconds,
+          })
+        );
       }, 1000);
       return () => {
         clearTimeout(timer);
@@ -36,8 +46,10 @@ const Timer = ({ maxTime, roomId, roomName }) => {
     setPlay(true);
     dispatch(
       addGame({
-        name: "test",
         roomId,
+        roomName,
+        currentTip: "",
+        seconds,
       })
     );
     setPause(false);
@@ -52,6 +64,11 @@ const Timer = ({ maxTime, roomId, roomName }) => {
     setPlay(false);
     setPause(false);
     setStop(true);
+    dispatch(
+      stopGame({
+        roomId,
+      })
+    );
   };
 
   return (

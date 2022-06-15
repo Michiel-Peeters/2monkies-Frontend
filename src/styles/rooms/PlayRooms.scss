@@ -17,4 +17,22 @@
             font-weight: bold;
         }
     }
+    &__play{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 100px;
+        height: 100%;
+        padding: 75px;
+        &__timer{
+            font-size: 100px;
+        }
+        &__currenttip{
+            font-size: 75px;
+            font-weight: bold;
+            color: $mediumblue;
+            align-self: flex-start;
+        }
+    }
 }

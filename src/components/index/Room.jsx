@@ -29,7 +29,7 @@ const Room = ({
         <div className="content">
           <Timer maxTime={maxTime} roomId={id} roomName={name} />
           <div className="content__tips">
-            <TipForm tip={tip} setTip={setTip} />
+            <TipForm tip={tip} setTip={setTip} roomId={id} />
             <DefaultTips defaultTips={tips} setTip={setTip} />
           </div>
         </div>
