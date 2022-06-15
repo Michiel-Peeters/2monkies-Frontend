@@ -19,7 +19,7 @@ const Room = ({
         <summary>
           {name}
           <Link
-            to={`/${name}`}
+            to={`/rooms/${id}`}
             target={"_blank"}
             className="button button__preview"
           >
