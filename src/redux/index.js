@@ -7,6 +7,27 @@ import tipAPI from "./api/tipAPI";
 import tipGivenAPI from "./api/tipGivenAPI";
 import userAPI from "./api/userAPI";
 import playingSlice from "./slices/playing";
+import storage from "redux-persist/lib/storage";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+
+const persistConfig = {
+  key: "playing",
+  storage,
+};
+
+const reducers = combineReducers({
+  [playingSlice.name]: playingSlice.reducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
   reducer: combineReducers({
@@ -19,10 +40,14 @@ const store = configureStore({
     [userAPI.reducerPath]: userAPI.reducer,
 
     // Redux Slices
-    [playingSlice.name]: playingSlice.reducer,
+    persistedReducer,
   }),
   middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware(),
+    ...getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
     difficultyAPI.middleware,
     roomAPI.middleware,
     gameAPI.middleware,

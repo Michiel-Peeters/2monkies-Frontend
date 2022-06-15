@@ -11,7 +11,7 @@ const PlayRoom = () => {
     refetchOnReconnect: true,
   });
 
-  const game = useSelector((state) => state.playingState);
+  const game = useSelector((state) => state.persistedReducer.playingState);
 
   console.log(game);
   return (
