@@ -27,7 +27,7 @@ const Room = ({
           </Link>
         </summary>
         <div className="content">
-          <Timer maxTime={maxTime} />
+          <Timer maxTime={maxTime} roomId={id} roomName={name} />
           <div className="content__tips">
             <TipForm tip={tip} setTip={setTip} />
             <DefaultTips defaultTips={tips} setTip={setTip} />

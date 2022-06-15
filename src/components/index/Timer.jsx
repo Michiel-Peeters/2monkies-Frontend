@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useTimer } from "react-timer-hook";
+import { useDispatch, useSelector } from "react-redux";
+import { addGame } from "../../redux/slices/playing.js";
 
-const Timer = ({ maxTime }) => {
+const Timer = ({ maxTime, roomId, roomName }) => {
   const time = maxTime;
   const [seconds, setSeconds] = useState(time * 60);
   const [playTime, setPlayTime] = useState(
@@ -28,8 +29,17 @@ const Timer = ({ maxTime }) => {
     }
   });
 
+  const startingGame = useSelector((state) => state.playingState);
+  const dispatch = useDispatch();
+
   const playHandler = () => {
     setPlay(true);
+    dispatch(
+      addGame({
+        name: "test",
+        roomId,
+      })
+    );
     setPause(false);
     setStop(false);
   };

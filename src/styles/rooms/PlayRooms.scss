@@ -1,0 +1,20 @@
+.playroom{
+    height: 95vh;
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        height: 100%;
+        &__welkom{
+            font-size: 80px;
+            font-weight: bold;
+            color: $mediumblue
+        }
+        &__name{
+            font-size: 50px;
+            font-weight: bold;
+        }
+    }
+}
