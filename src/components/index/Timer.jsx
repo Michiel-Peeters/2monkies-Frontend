@@ -6,10 +6,20 @@ import {
   stopGame,
   updateSeconds,
 } from "../../redux/slices/playing.js";
+import {
+  usePatchGameMutation,
+  usePostGameMutation,
+} from "../../redux/api/gameAPI.js";
 
-const Timer = ({ maxTime, roomId, roomName }) => {
-  const time = maxTime;
-  const [seconds, setSeconds] = useState(time * 60);
+const Timer = ({
+  maxTime,
+  roomId,
+  roomName,
+  gameId,
+  setGameId,
+  seconds,
+  setSeconds,
+}) => {
   const [playTime, setPlayTime] = useState(
     new Date(seconds * 1000).toISOString().substr(11, 8)
   );
@@ -22,43 +32,53 @@ const Timer = ({ maxTime, roomId, roomName }) => {
       const timer = setTimeout(() => {
         setSeconds((prev) => prev - 1);
         setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
-        dispatch(
-          updateSeconds({
-            roomId,
-            seconds,
-          })
-        );
       }, 1000);
       return () => {
         clearTimeout(timer);
       };
     }
-    if (stop) {
-      setSeconds(time * 60);
+    if (stop || seconds == 0) {
+      setSeconds(maxTime * 60);
       setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
     }
   });
 
-  const startingGame = useSelector((state) => state.playingState);
-  const dispatch = useDispatch();
+  const [postGame] = usePostGameMutation();
+  const [patchGame] = usePatchGameMutation();
 
-  const game = useSelector(
-    (state) =>
-      state.persistedReducer.playingState.filter(
-        ({ gameInfo: { roomId } }) => roomId == roomId
-      )[0]
-  );
+  const getTimeNow = () => {
+    let today = new Date();
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return date + " " + time;
+  };
 
-  const playHandler = () => {
+  const playHandler = async () => {
     setPlay(true);
-    dispatch(
-      addGame({
-        roomId,
-        roomName,
-        currentTip: "",
-        seconds,
-      })
-    );
+    const { data } = await postGame({
+      user: "/api/users/1",
+      room: `/api/rooms/${roomId}`,
+      startDate: getTimeNow(),
+      endDate: getTimeNow(),
+      currentTip: "",
+      seconds: seconds,
+      active: 1,
+    });
+    setGameId(data.id);
+    // dispatch(
+    //   addGame({
+    //     roomId,
+    //     roomName,
+    //     currentTip: "",
+    //     seconds,
+    //   })
+    // );
     setPause(false);
     setStop(false);
   };
@@ -71,12 +91,18 @@ const Timer = ({ maxTime, roomId, roomName }) => {
     setPlay(false);
     setPause(false);
     setStop(true);
-    dispatch(
-      stopGame({
-        roomId,
-      })
-    );
+    console.log(gameId);
+    patchGame({
+      gameId,
+      body: { active: 0, endDate: getTimeNow(), currentTip: "" },
+    });
+    setSeconds(maxTime * 60);
+    setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
   };
+
+  if (seconds == 0) {
+    stopHandler();
+  }
 
   return (
     <div className="content__timer">

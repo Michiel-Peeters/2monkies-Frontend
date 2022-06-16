@@ -13,7 +13,7 @@ const Routing = () => {
         <Route path={views.INDEX} element={<Index />} />
         <Route path={views.ROOMS}>
           <Route index element={<Rooms />} />
-          <Route path={views.ROOMS + "/:id"} element={<PlayRoom />} />
+          <Route path={views.ROOMS + "/:playroomid"} element={<PlayRoom />} />
           <Route
             path={views.ROOMS + "/preview/:id"}
             element={<PreviewRoom />}

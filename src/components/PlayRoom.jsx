@@ -2,66 +2,80 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetRoomByIdQuery } from "../redux/api/roomAPI";
 import { useDispatch, useSelector } from "react-redux";
+import { useGetGamesQuery } from "../redux/api/gameAPI";
 
 const PlayRoom = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [playTime, setPlayTime] = useState(
-    new Date(seconds * 1000).toISOString().substr(11, 8)
-  );
+  const [seconds, setSeconds] = useState(10);
+  const [playTime, setPlayTime] = useState(0);
+  const [isActive, setIsactive] = useState(false);
+  const [activeGame, setActiveGame] = useState([]);
+  const [rerender, setRerender] = useState(0);
 
-  const { id } = useParams();
-  const { data, isError, isLoading } = useGetRoomByIdQuery(id, {
-    pollingInterval: 0,
+  const { playroomid } = useParams();
+  const { data } = useGetRoomByIdQuery(playroomid);
+
+  const { data: gameData } = useGetGamesQuery(undefined, {
+    pollingInterval: 1000,
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
 
-  const game = useSelector(
-    (state) =>
-      state.persistedReducer.playingState.filter(
-        ({ gameInfo: { roomId } }) => roomId == id
-      )[0]
-  );
-  console.log(game);
-
   useEffect(() => {
-    if (game) {
-      setSeconds((prev) => (prev = game.gameInfo.seconds));
+    console.log(gameData);
+    if (gameData) {
+      console.log(activeGame);
+      setActiveGame(
+        gameData["hydra:member"].filter(
+          ({ active, room: { id } }) => active == 1 && id == playroomid
+        )
+      );
+      console.log(activeGame);
+      if (activeGame.length > 0) {
+        setIsactive(true);
+      } else {
+        setIsactive(false);
+      }
     }
-  }, []);
+    console.log(activeGame);
+  }, [rerender]);
+
+  // useEffect(() => {
+  //   if (activeGame.length > 0) {
+  //     const timer = setTimeout(() => {
+  //       setSeconds((prev) => prev - 1);
+  //       setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
+  //     }, 1000);
+  //     return () => {
+  //       clearTimeout(timer);
+  //     };
+  //   }
+  // });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSeconds((prev) => prev - 1);
-      setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  });
-
-  setInterval(() => {
-    window.location.reload(false);
-  }, 5000);
+    setInterval(() => {
+      setRerender((prev) => prev + 1);
+    }, 500);
+  }, []);
 
   return (
     <div className="container__medium">
       <section className="playroom">
-        {!game && (
+        {!isActive && (
           <div className="playroom__content">
             <h2 className="playroom__content__welkom">Lets Play</h2>
             <h3 className="playroom__content__name">{data?.name}</h3>
           </div>
         )}
-        {game && (
-          <div className="playroom__play">
-            <h2 className="playroom__play__timer">{playTime}</h2>
-            <h3 className="playroom__play__currenttip">
-              {game.gameInfo.currentTip}
-            </h3>
-          </div>
-        )}
+
+        {isActive &&
+          activeGame.map(({ currentTip }) => {
+            return (
+              <div className="playroom__play">
+                <h2 className="playroom__play__timer">{data?.name}</h2>
+                <h3 className="playroom__play__currenttip">{currentTip}</h3>
+              </div>
+            );
+          })}
       </section>
     </div>
   );

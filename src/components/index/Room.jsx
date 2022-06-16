@@ -13,6 +13,8 @@ const Room = ({
   },
 }) => {
   const [tip, setTip] = useState("");
+  const [gameId, setGameId] = useState(0);
+  const [seconds, setSeconds] = useState(maxTime * 60);
   return (
     <div className="escape__rooms__room">
       <details>
@@ -27,9 +29,23 @@ const Room = ({
           </Link>
         </summary>
         <div className="content">
-          <Timer maxTime={maxTime} roomId={id} roomName={name} />
+          <Timer
+            maxTime={maxTime}
+            roomId={id}
+            roomName={name}
+            gameId={gameId}
+            setGameId={setGameId}
+            seconds={seconds}
+            setSeconds={setSeconds}
+          />
           <div className="content__tips">
-            <TipForm tip={tip} setTip={setTip} roomId={id} />
+            <TipForm
+              tip={tip}
+              setTip={setTip}
+              roomId={id}
+              gameId={gameId}
+              seconds={seconds}
+            />
             <DefaultTips defaultTips={tips} setTip={setTip} />
           </div>
         </div>

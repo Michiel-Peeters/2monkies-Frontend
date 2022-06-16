@@ -1,9 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { usePatchGameMutation } from "../../redux/api/gameAPI";
 import { updateCurrentTip } from "../../redux/slices/playing";
 
-const TipForm = ({ tip, setTip, roomId }) => {
+const TipForm = ({ tip, setTip, roomId, gameId, seconds }) => {
   const dispatch = useDispatch();
+
+  const [patchGame] = usePatchGameMutation();
 
   return (
     <form
@@ -11,12 +14,13 @@ const TipForm = ({ tip, setTip, roomId }) => {
       className="content__tips__form"
       onSubmit={(e) => {
         e.preventDefault();
-        dispatch(
-          updateCurrentTip({
-            roomId,
-            currentTip: tip,
-          })
-        );
+        // dispatch(
+        //   updateCurrentTip({
+        //     roomId,
+        //     currentTip: tip,
+        //   })
+        // );
+        patchGame({ gameId, body: { currentTip: tip, seconds: seconds } });
       }}
     >
       <textarea

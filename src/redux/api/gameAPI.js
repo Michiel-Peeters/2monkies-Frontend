@@ -13,21 +13,41 @@ const gameAPI = createApi({
     getGameById: builder.query({
       query: (id) => `/${id}`,
     }),
-    postGame: builder.query({
-      query: ({ user, room, startDate, endDate }) => ({
-        url: `/`,
+    postGame: builder.mutation({
+      query: ({
+        user,
+        room,
+        startDate,
+        endDate,
+        currentTip,
+        seconds,
+        active,
+      }) => ({
+        url: ``,
         method: "POST",
         body: {
           user,
           room,
           startDate,
           endDate,
+          currentTip,
+          seconds,
+          active,
         },
       }),
       invalidatesTags: ["AllGames"],
     }),
     putGame: builder.query({
-      query: ({ id, user, room, startDate, endDate }) => ({
+      query: ({
+        id,
+        user,
+        room,
+        startDate,
+        endDate,
+        currentTip,
+        seconds,
+        active,
+      }) => ({
         url: `/${id}`,
         method: "PUT",
         body: {
@@ -35,20 +55,22 @@ const gameAPI = createApi({
           room,
           startDate,
           endDate,
+          currentTip,
+          seconds,
+          active,
         },
       }),
       invalidatesTags: ["AllGames"],
     }),
-    patchGame: builder.query({
-      query: ({ id, user, room, startDate, endDate }) => ({
-        url: `/${id}`,
+    patchGame: builder.mutation({
+      query: ({ gameId, body }) => ({
+        url: `/${gameId}`,
         method: "PATCH",
-        body: {
-          user,
-          room,
-          startDate,
-          endDate,
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/merge-patch+json",
         },
+        body: JSON.stringify(body),
       }),
       invalidatesTags: ["AllGames"],
     }),
