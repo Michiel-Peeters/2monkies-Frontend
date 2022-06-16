@@ -42,6 +42,13 @@ const Timer = ({ maxTime, roomId, roomName }) => {
   const startingGame = useSelector((state) => state.playingState);
   const dispatch = useDispatch();
 
+  const game = useSelector(
+    (state) =>
+      state.persistedReducer.playingState.filter(
+        ({ gameInfo: { roomId } }) => roomId == roomId
+      )[0]
+  );
+
   const playHandler = () => {
     setPlay(true);
     dispatch(

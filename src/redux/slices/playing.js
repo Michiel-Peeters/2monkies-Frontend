@@ -22,7 +22,7 @@ const playingSlice = createSlice({
       const gameToEdit = state.find(
         ({ gameInfo }) => gameInfo.roomId == roomId
       );
-      gameToEdit.gameInfo.seconds = seconds - 3;
+      gameToEdit.gameInfo.seconds = seconds - 2;
     },
     stopGame(state, { payload }) {
       state.splice(
