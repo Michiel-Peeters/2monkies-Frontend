@@ -62,7 +62,7 @@ const Timer = ({
   const playHandler = async () => {
     setPlay(true);
     const { data } = await postGame({
-      user: "/api/users/1",
+      user: "/api/users/2",
       room: `/api/rooms/${roomId}`,
       startDate: getTimeNow(),
       endDate: getTimeNow(),

@@ -13,7 +13,7 @@ const tipAPI = createApi({
     getTipById: builder.query({
       query: (id) => `/${id}`,
     }),
-    postTip: builder.query({
+    postTip: builder.mutation({
       query: ({ description }) => ({
         url: `/`,
         method: "POST",
@@ -23,7 +23,7 @@ const tipAPI = createApi({
       }),
       invalidatesTags: ["AllTips"],
     }),
-    putTip: builder.query({
+    putTip: builder.mutation({
       query: ({ id, description }) => ({
         url: `/${id}`,
         method: "PUT",
@@ -33,7 +33,7 @@ const tipAPI = createApi({
       }),
       invalidatesTags: ["AllTips"],
     }),
-    patchTip: builder.query({
+    patchTip: builder.mutation({
       query: ({ id, description }) => ({
         url: `/${id}`,
         method: "PATCH",
@@ -43,7 +43,7 @@ const tipAPI = createApi({
       }),
       invalidatesTags: ["AllTips"],
     }),
-    deleteTip: builder.query({
+    deleteTip: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",

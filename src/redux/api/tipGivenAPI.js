@@ -15,7 +15,7 @@ const tipGivenAPI = createApi({
     getTipGivenById: builder.query({
       query: (id) => `/${id}`,
     }),
-    postTipGiven: builder.query({
+    postTipGiven: builder.mutation({
       query: ({ name, difficulty }) => ({
         url: `/`,
         method: "POST",
@@ -26,7 +26,7 @@ const tipGivenAPI = createApi({
       }),
       invalidatesTags: ["AllTipsGiven"],
     }),
-    putTipGiven: builder.query({
+    putTipGiven: builder.mutation({
       query: ({ id, name, difficulty }) => ({
         url: `/${id}`,
         method: "PUT",
@@ -37,7 +37,7 @@ const tipGivenAPI = createApi({
       }),
       invalidatesTags: ["AllTipsGiven"],
     }),
-    patchTipGiven: builder.query({
+    patchTipGiven: builder.mutation({
       query: ({ id, name, difficulty }) => ({
         url: `/${id}`,
         method: "PATCH",
@@ -48,7 +48,7 @@ const tipGivenAPI = createApi({
       }),
       invalidatesTags: ["AllTipsGiven"],
     }),
-    deleteTipGiven: builder.query({
+    deleteTipGiven: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",

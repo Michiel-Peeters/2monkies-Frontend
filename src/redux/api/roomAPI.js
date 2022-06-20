@@ -13,7 +13,7 @@ const roomAPI = createApi({
     getRoomById: builder.query({
       query: (id) => `/${id}`,
     }),
-    postRoom: builder.query({
+    postRoom: builder.mutation({
       query: ({ name, difficulty }) => ({
         url: `/`,
         method: "POST",
@@ -24,7 +24,7 @@ const roomAPI = createApi({
       }),
       invalidatesTags: ["AllRooms"],
     }),
-    putRoom: builder.query({
+    putRoom: builder.mutation({
       query: ({ id, name, difficulty }) => ({
         url: `/${id}`,
         method: "PUT",
@@ -35,7 +35,7 @@ const roomAPI = createApi({
       }),
       invalidatesTags: ["AllRooms"],
     }),
-    patchRoom: builder.query({
+    patchRoom: builder.mutation({
       query: ({ id, name, difficulty }) => ({
         url: `/${id}`,
         method: "PATCH",
@@ -46,7 +46,7 @@ const roomAPI = createApi({
       }),
       invalidatesTags: ["AllRooms"],
     }),
-    deleteRoom: builder.query({
+    deleteRoom: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",

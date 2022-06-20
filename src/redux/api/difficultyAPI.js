@@ -13,7 +13,7 @@ const difficultyAPI = createApi({
     getDifficultyById: builder.query({
       query: (id) => `/${id}`,
     }),
-    postDifficulty: builder.query({
+    postDifficulty: builder.mutation({
       query: ({ name, maxTime }) => ({
         url: `/`,
         method: "POST",
@@ -24,7 +24,7 @@ const difficultyAPI = createApi({
       }),
       invalidatesTags: ["AllDifficulties"],
     }),
-    putDifficulty: builder.query({
+    putDifficulty: builder.mutation({
       query: ({ id, name, maxTime }) => ({
         url: `/${id}`,
         method: "PUT",
@@ -35,7 +35,7 @@ const difficultyAPI = createApi({
       }),
       invalidatesTags: ["AllDifficulties"],
     }),
-    patchDifficulty: builder.query({
+    patchDifficulty: builder.mutation({
       query: ({ id, name, maxTime }) => ({
         url: `/${id}`,
         method: "PATCH",
@@ -46,7 +46,7 @@ const difficultyAPI = createApi({
       }),
       invalidatesTags: ["AllDifficulties"],
     }),
-    deleteDifficulty: builder.query({
+    deleteDifficulty: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",

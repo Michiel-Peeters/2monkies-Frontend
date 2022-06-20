@@ -13,7 +13,7 @@ const userAPI = createApi({
     getUserById: builder.query({
       query: (id) => `/${id}`,
     }),
-    postUser: builder.query({
+    postUser: builder.mutation({
       query: ({ email, roles, password, firstName, lastName }) => ({
         url: `/`,
         method: "POST",
@@ -27,7 +27,7 @@ const userAPI = createApi({
       }),
       invalidatesTags: ["AllUsers"],
     }),
-    putUser: builder.query({
+    putUser: builder.mutation({
       query: ({ id, email, roles, password, firstName, lastName }) => ({
         url: `/${id}`,
         method: "PUT",
@@ -41,7 +41,7 @@ const userAPI = createApi({
       }),
       invalidatesTags: ["AllUsers"],
     }),
-    patchUser: builder.query({
+    patchUser: builder.mutation({
       query: ({ id, email, roles, password, firstName, lastName }) => ({
         url: `/${id}`,
         method: "PATCH",
@@ -55,7 +55,7 @@ const userAPI = createApi({
       }),
       invalidatesTags: ["AllUsers"],
     }),
-    deleteUser: builder.query({
+    deleteUser: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",

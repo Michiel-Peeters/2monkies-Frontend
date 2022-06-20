@@ -37,7 +37,7 @@ const gameAPI = createApi({
       }),
       invalidatesTags: ["AllGames"],
     }),
-    putGame: builder.query({
+    putGame: builder.mutation({
       query: ({
         id,
         user,
@@ -74,7 +74,7 @@ const gameAPI = createApi({
       }),
       invalidatesTags: ["AllGames"],
     }),
-    deleteGame: builder.query({
+    deleteGame: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
         method: "DELETE",
