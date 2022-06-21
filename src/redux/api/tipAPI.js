@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const tipAPI = createApi({
   reducerPath: "tipState",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/tips",
+    baseUrl: "https://wdev2.be/fs_michiel/eindwerk/api/tips",
   }),
   endpoints: (builder) => ({
     getTips: builder.query({

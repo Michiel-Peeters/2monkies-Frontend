@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const tipGivenAPI = createApi({
   reducerPath: "tipGivenState",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/tip_givens",
+    baseUrl: "https://wdev2.be/fs_michiel/eindwerk/api/tip_givens",
   }),
   endpoints: (builder) => ({
     getAllTipsGiven: builder.query({

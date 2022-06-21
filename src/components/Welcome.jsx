@@ -12,9 +12,13 @@ const Welcome = () => {
           <p className="heading__items__user">
             Welkom <span>NAME</span>
           </p>
-          <Link to="/admin" className="button button__admin">
+          <a
+            href="http://localhost:8000/admin"
+            target={"_blank"}
+            className="button button__admin"
+          >
             Admin
-          </Link>
+          </a>
           <Link to="/" className="button button__logout">
             Logout
           </Link>

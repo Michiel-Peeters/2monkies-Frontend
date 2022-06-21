@@ -6,7 +6,7 @@ import { useGetRoomsQuery } from "../redux/api/roomAPI";
 
 const Rooms = () => {
   const { data, isError, isLoading } = useGetRoomsQuery(undefined, {
-    pollingInterval: 0,
+    pollingInterval: 5000,
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });

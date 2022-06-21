@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const roomAPI = createApi({
   reducerPath: "roomState",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/rooms",
+    baseUrl: "https://wdev2.be/fs_michiel/eindwerk/api/rooms",
   }),
   endpoints: (builder) => ({
     getRooms: builder.query({
