@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Welcome = () => {
   const user = useSelector((state) => state.userState)[0].user;
-  console.log(user);
+  console.log(user.roles);
 
   return (
     <>
@@ -19,13 +19,16 @@ const Welcome = () => {
               {user.firstName} {user.lastName}
             </span>
           </p>
-          <a
-            href="https://wdev2.be/fs_michiel/eindwerk/admin"
-            target={"_blank"}
-            className="button button__admin"
-          >
-            Admin
-          </a>
+
+          {user.roles.includes("ROLE_ADMIN") && (
+            <a
+              href="https://wdev2.be/fs_michiel/eindwerk/admin"
+              target={"_blank"}
+              className="button button__admin"
+            >
+              Admin
+            </a>
+          )}
           <Link to="/" className="button button__logout">
             Logout
           </Link>
