@@ -27,6 +27,8 @@ const Timer = ({
   const [pause, setPause] = useState(false);
   const [stop, setStop] = useState(false);
 
+  const user = useSelector((state) => state.userState)[0].user;
+
   useEffect(() => {
     if (play) {
       const timer = setTimeout(() => {
@@ -62,7 +64,7 @@ const Timer = ({
   const playHandler = async () => {
     setPlay(true);
     const { data } = await postGame({
-      user: "/api/users/2",
+      user: `/api/users/${user.id}`,
       room: `/api/rooms/${roomId}`,
       startDate: getTimeNow(),
       endDate: getTimeNow(),

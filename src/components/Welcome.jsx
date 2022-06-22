@@ -1,8 +1,12 @@
 import React from "react";
 import logo from "../images/Logo_Transparant.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Welcome = () => {
+  const user = useSelector((state) => state.userState)[0].user;
+  console.log(user);
+
   return (
     <>
       <div className="heading">
@@ -10,10 +14,13 @@ const Welcome = () => {
 
         <div className="heading__items">
           <p className="heading__items__user">
-            Welkom <span>NAME</span>
+            Welkom{" "}
+            <span>
+              {user.firstName} {user.lastName}
+            </span>
           </p>
           <a
-            href="http://localhost:8000/admin"
+            href="https://wdev2.be/fs_michiel/eindwerk/admin"
             target={"_blank"}
             className="button button__admin"
           >

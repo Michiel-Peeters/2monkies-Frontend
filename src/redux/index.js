@@ -17,6 +17,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import userSlice from "./slices/user";
+import loginAPI from "./api/loginAPI";
 
 const persistConfig = {
   key: "playing",
@@ -38,9 +40,11 @@ const store = configureStore({
     [tipGivenAPI.reducerPath]: tipGivenAPI.reducer,
     [tipAPI.reducerPath]: tipAPI.reducer,
     [userAPI.reducerPath]: userAPI.reducer,
+    [loginAPI.reducerPath]: loginAPI.reducer,
 
     // Redux Slices
     persistedReducer,
+    [userSlice.name]: userSlice.reducer,
   }),
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
