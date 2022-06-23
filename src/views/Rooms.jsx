@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Welcome from "../components/Welcome";
 import Info from "../components/index/Info";
 import Room from "../components/index/Room";
 import { useGetRoomsQuery } from "../redux/api/roomAPI";
+import store from "../redux";
+import userSlice from "../redux/slices/user";
 
 const Rooms = () => {
   const { data, isError, isLoading } = useGetRoomsQuery(undefined, {

@@ -7,11 +7,11 @@ const gameAPI = createApi({
   }),
   endpoints: (builder) => ({
     getGames: builder.query({
-      query: () => `/`,
+      query: () => ({ url: `/`, credentials: "include" }),
       providesTags: ["AllGames"],
     }),
     getGameById: builder.query({
-      query: (id) => `/${id}`,
+      query: (id) => ({ url: `/${id}`, credentials: "include" }),
     }),
     postGame: builder.mutation({
       query: ({
@@ -25,6 +25,7 @@ const gameAPI = createApi({
       }) => ({
         url: ``,
         method: "POST",
+        credentials: "include",
         body: {
           user,
           room,
@@ -66,6 +67,7 @@ const gameAPI = createApi({
       query: ({ gameId, body }) => ({
         url: `/${gameId}`,
         method: "PATCH",
+        credentials: "include",
         headers: {
           accept: "application/json",
           "Content-Type": "application/merge-patch+json",

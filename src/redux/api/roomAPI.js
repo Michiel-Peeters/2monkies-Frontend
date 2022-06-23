@@ -7,11 +7,11 @@ const roomAPI = createApi({
   }),
   endpoints: (builder) => ({
     getRooms: builder.query({
-      query: () => `/`,
+      query: () => ({ url: `/`, credentials: "include" }),
       providesTags: ["AllRooms"],
     }),
     getRoomById: builder.query({
-      query: (id) => `/${id}`,
+      query: (id) => ({ url: `/${id}`, credentials: "include" }),
     }),
     postRoom: builder.mutation({
       query: ({ name, difficulty }) => ({

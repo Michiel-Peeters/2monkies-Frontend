@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/Logo_Transparant.png";
 import store from "../../redux";
-import { useLoginMutation } from "../../redux/api/loginAPI";
+import {
+  useLoginGroupMutation,
+  useLoginMutation,
+} from "../../redux/api/loginAPI";
 import userSlice from "../../redux/slices/user";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [login] = useLoginMutation();
+  const [loginGroup] = useLoginGroupMutation();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await login({ email, password });
-    store.dispatch(userSlice.actions.addUser(data));
-    console.log(data);
+    const { data } = await login({ username, password });
+    const { data: user } = await loginGroup({ username, password });
+    console.log(user);
+    store.dispatch(userSlice.actions.addUser(user));
     navigate("/rooms");
   };
 
@@ -30,9 +35,9 @@ const Login = () => {
             type="text"
             className="login__form__input"
             placeholder="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <input

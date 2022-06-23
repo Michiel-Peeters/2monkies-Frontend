@@ -73,14 +73,6 @@ const Timer = ({
       active: 1,
     });
     setGameId(data.id);
-    // dispatch(
-    //   addGame({
-    //     roomId,
-    //     roomName,
-    //     currentTip: "",
-    //     seconds,
-    //   })
-    // );
     setPause(false);
     setStop(false);
   };

@@ -1,11 +1,20 @@
 import React from "react";
 import logo from "../images/Logo_Transparant.png";
-import { Link } from "react-router-dom";
+import store from "../redux";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import userSlice from "../redux/slices/user";
 
 const Welcome = () => {
   const user = useSelector((state) => state.userState)[0].user;
-  console.log(user.roles);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    store.dispatch(userSlice.actions.removeUser());
+    navigate("/");
+  };
 
   return (
     <>
@@ -29,9 +38,11 @@ const Welcome = () => {
               Admin
             </a>
           )}
-          <Link to="/" className="button button__logout">
-            Logout
-          </Link>
+          <form action="" onSubmit={handleSubmit}>
+            <button type="submit" className="button button__logout">
+              logout
+            </button>
+          </form>
         </div>
       </div>
     </>
