@@ -14,11 +14,11 @@ const userSlice = createSlice({
     removeUser(state, { payload }) {
       state.length = 0;
     },
-    lengthState(state, { payload }) {
-      return state.length;
+    userState(state, { payload }) {
+      return state;
     },
   },
 });
 
 export default userSlice;
-export const { addUser, removeUser, lengthState } = userSlice.actions;
+export const { addUser, removeUser, userState } = userSlice.actions;

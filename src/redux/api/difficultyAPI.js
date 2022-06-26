@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const difficultyAPI = createApi({
   reducerPath: "difficultyState",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://wdev2.be/fs_michiel/eindwerk/api/difficulties",
+    baseUrl: `${import.meta.env.VITE_API}/difficulties`,
   }),
   endpoints: (builder) => ({
     getDifficulties: builder.query({

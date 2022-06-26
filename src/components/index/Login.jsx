@@ -18,11 +18,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await login({ username, password });
+    const { data, isError } = await login({ username, password });
     const { data: user } = await loginGroup({ username, password });
+    console.log(data);
     console.log(user);
-    store.dispatch(userSlice.actions.addUser(user));
-    navigate("/rooms");
+    if (data) {
+      store.dispatch(userSlice.actions.addUser(user));
+      navigate("/rooms");
+    }
   };
 
   return (

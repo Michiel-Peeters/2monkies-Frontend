@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const userAPI = createApi({
   reducerPath: "userState",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://wdev2.be/fs_michiel/eindwerk/api/users",
+    baseUrl: `${import.meta.env.VITE_API}/users`,
   }),
   endpoints: (builder) => ({
     getUsers: builder.query({
