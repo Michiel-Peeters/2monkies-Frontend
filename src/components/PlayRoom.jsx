@@ -21,35 +21,19 @@ const PlayRoom = () => {
   });
 
   useEffect(() => {
-    console.log(gameData);
     if (gameData) {
-      console.log(activeGame);
       setActiveGame(
         gameData["hydra:member"].filter(
           ({ active, room: { id } }) => active == 1 && id == playroomid
         )
       );
-      console.log(activeGame);
       if (activeGame.length > 0) {
         setIsactive(true);
       } else {
         setIsactive(false);
       }
     }
-    console.log(activeGame);
   }, [rerender]);
-
-  // useEffect(() => {
-  //   if (activeGame.length > 0) {
-  //     const timer = setTimeout(() => {
-  //       setSeconds((prev) => prev - 1);
-  //       setPlayTime(new Date(seconds * 1000).toISOString().substr(11, 8));
-  //     }, 1000);
-  //     return () => {
-  //       clearTimeout(timer);
-  //     };
-  //   }
-  // });
 
   useEffect(() => {
     setInterval(() => {

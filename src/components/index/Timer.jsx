@@ -85,7 +85,6 @@ const Timer = ({
     setPlay(false);
     setPause(false);
     setStop(true);
-    console.log(gameId);
     patchGame({
       gameId,
       body: { active: 0, endDate: getTimeNow(), currentTip: "" },

@@ -20,8 +20,6 @@ const Login = () => {
     e.preventDefault();
     const { data, isError } = await login({ username, password });
     const { data: user } = await loginGroup({ username, password });
-    console.log(data);
-    console.log(user);
     if (data) {
       store.dispatch(userSlice.actions.addUser(user));
       navigate("/rooms");

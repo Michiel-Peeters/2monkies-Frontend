@@ -9,8 +9,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Rooms = () => {
-  console.log(store.getState().userState.length);
-
   const [user, setUser] = useState(store.getState().userState.length);
 
   const { data, isError, isLoading } = useGetRoomsQuery(undefined, {
@@ -22,7 +20,6 @@ const Rooms = () => {
 
   useEffect(() => {
     if (store.getState().userState.length == 0) {
-      console.log("redirect");
       navigate("/");
     }
   }, []);
